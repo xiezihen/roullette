@@ -5,9 +5,10 @@ int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
 int pinNum;
-int _speed = 50;
+int difficulty = 10;
+int _speed = 25;
+
 void setup() {
-  buttonState1 = digitalRead(button1);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
@@ -25,26 +26,48 @@ void setup() {
 // the loop function runs over and over again forever
 
   void loop() {
-  buttonState1 = digitalRead(button1);
-  
-   if (buttonState1 == HIGH){
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(10, HIGH);
+    
+    do{
+    buttonState1 = digitalRead(button1);
+    buttonState2 = digitalRead(button2);
+    buttonState3 = digitalRead(button3);
+      if (buttonState2 == HIGH){
+        digitalWrite(difficulty, LOW);
+        difficulty -= 1;
+        _speed -=25;
+      }
+      if (buttonState3 == HIGH){
+        digitalWrite(difficulty+1, HIGH);
+        difficulty += 1;
+        _speed+=25;
+      }
+
+    }while(buttonState1 == LOW);
+
     buttonState1 = LOW;
     do {
     
       pinNum = 3;
-      while (pinNum < 11){
+      do{
         _blink(pinNum, _speed);
         pinNum++;
-      }
+      }while (pinNum < 11 and buttonState1 == LOW);
      pinNum = 9;
      while (pinNum > 3){
        _blink(pinNum, _speed);
        pinNum--;
         }
       }while(buttonState1 == LOW);
-      digitalWrite(pinNum, HIGH);
   }
-  }
+  
 
 
 int _blink(int pinNum, int delayNum){
