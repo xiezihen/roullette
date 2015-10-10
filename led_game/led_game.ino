@@ -26,14 +26,10 @@ void setup() {
 
   void loop() {
   buttonState1 = digitalRead(button1);
-  }
+  
    if (buttonState1 == HIGH){
     buttonState1 = LOW;
     do {
-
-  
- 
-  
     
       pinNum = 3;
       while (pinNum < 11){
@@ -46,21 +42,23 @@ void setup() {
        pinNum--;
         }
       }while(buttonState1 == LOW);
+      digitalWrite(pinNum, HIGH);
+  }
   }
 
 
 int _blink(int pinNum, int delayNum){
-  if (buttonState1 LOW){\
+  if (buttonState1 == LOW){
   buttonState1 = digitalRead(button1);
   }
   digitalWrite(pinNum, HIGH);
   delay(delayNum);
-    if (buttonState1 LOW){\
+    if (buttonState1 == LOW){
   buttonState1 = digitalRead(button1);
   }
   digitalWrite(pinNum, LOW); 
   delay(delayNum);
-    if (buttonState1 LOW){\
+    if (buttonState1 == LOW){
   buttonState1 = digitalRead(button1);
   }
 
